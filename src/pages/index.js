@@ -1,6 +1,6 @@
-import useIsAuthUser from "../global/useIsAuthUser";
+import useIsAuthUser from '../global/useIsAuthUser';
 
 export default function Home() {
-    useIsAuthUser();
-    return <div>home</div>
+  useIsAuthUser();
+  return <div>home</div>;
 }
