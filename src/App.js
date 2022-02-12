@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import routes from './constants/routes';
+import Home from 'pages/index';
 
-import Home from './pages/index';
+import routes from './constants/routes';
 import Login from './pages/login';
 import Registration from './pages/registration';
-import User from './global/user';
+import User from './global/user/user';
 
 function App() {
   return (

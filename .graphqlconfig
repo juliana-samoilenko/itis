@@ -1,0 +1,12 @@
+{
+  "name": "itis",
+  "schemaPath": "./schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "producrion": {
+        "url": "https://itis-task-tracker-be.herokuapp.com/graphql",
+        "introspect": true
+      }
+    }
+  }
+}
