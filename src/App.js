@@ -7,7 +7,7 @@ import routes from "./contstants/routes";
 import Home from './pages/index';
 import Login from './pages/login';
 import Registration from './pages/registration';
-import User from "./global/user";
+import User from "./global/user/user";
 
 function App() {
     return (
