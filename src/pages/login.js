@@ -1,21 +1,15 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../global/user/user';
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ login: '', password: '' });
 
-  const handleChange = (event) => {
+  const handleEvent = (event) => {
+    const { type } = event;
     const { id, value } = event.target;
     setLoginForm((currentState) => ({
       ...currentState,
-      [id]: value,
-    }));
-  };
-
-  const handleBlur = (event) => {
-    const { id, value } = event.target;
-    setLoginForm((currentState) => ({
-      ...currentState,
-      [id]: value.trim(),
+      [id]: type === 'blur' ? value.trim() : value,
     }));
   };
 
@@ -27,8 +21,8 @@ export default function Login() {
   return (
     <div>
       <form>
-        <input type="text" id="login" onChange={handleChange} onBlur={handleBlur} value={loginForm.login} />
-        <input type="password" id="password" onChange={handleChange} onBlur={handleBlur} value={loginForm.password} />
+        <input type="text" id="login" onChange={handleEvent} onBlur={handleEvent} value={loginForm.login} />
+        <input type="password" id="password" onChange={handleEvent} onBlur={handleEvent} value={loginForm.password} />
         <button type="button" onClick={handleLoginClick}>
           login
         </button>
