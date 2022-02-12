@@ -29,7 +29,9 @@ export default function Login() {
       <form>
         <input type="text" id="login" onChange={handleChange} onBlur={handleBlur} value={loginForm.login} />
         <input type="password" id="password" onChange={handleChange} onBlur={handleBlur} value={loginForm.password} />
-        <button onClick={handleLoginClick}> login</button>
+        <button type="button" onClick={handleLoginClick}>
+          login
+        </button>
       </form>
     </div>
   );

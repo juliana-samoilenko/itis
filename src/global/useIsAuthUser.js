@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { UserContext } from './user';
 import { useHistory } from 'react-router-dom';
-import routes from '../contstants/routes';
+import { UserContext } from './user';
+import routes from '../constants/routes';
 
 export default function useIsAuthUser() {
   const { user } = useContext(UserContext);

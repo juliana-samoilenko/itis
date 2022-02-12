@@ -1,0 +1,61 @@
+{
+  "extends": ["airbnb", "prettier", "plugin:react/jsx-runtime"],
+  "globals": {
+    "document": true,
+    "localStorage": true,
+    "window": true,
+    "navigator": true,
+    "fetch": true,
+    "JSX": true
+  },
+  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-shadow": "off",
+    "prettier/prettier": "error",
+    "no-unused-vars": "off",
+    "no-console": 0,
+    "arrow-body-style": ["off"],
+    "no-use-before-define": 0,
+    "no-useless-escape": 0,
+    "react/require-default-props": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
+    "react/jsx-one-expression-per-line": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/prop-types": 0,
+    "react/no-array-index-key": 0,
+    "react/no-did-update-set-state": 0,
+    "react/jsx-curly-newline": 0,
+    "import/prefer-default-export": 0,
+    "import/named": 0,
+    "dot-notation": 0,
+    "global-require": 1,
+    "no-nested-ternary": "off",
+    "no-underscore-dangle": [2, { "allow": ["__STORE__"] }],
+    "jsx-a11y/label-has-for": [
+      1,
+      {
+        "components": ["Label"],
+        "required": {
+          "some": ["nesting", "id"]
+        },
+        "allowChildren": false
+      }
+    ],
+    "jsx-a11y/anchor-is-valid": 0,
+    "max-len": 0,
+    "camelcase": 0,
+    "react/jsx-props-no-spreading": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".json"],
+        "paths": ["./"]
+      }
+    }
+  }
+}
