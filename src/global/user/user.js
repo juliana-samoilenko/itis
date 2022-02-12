@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useMemo } from 'react';
 import { useApolloClient } from '@apollo/client';
 
 import { currentUser } from '../../graphQl/query/currentUser';
@@ -18,5 +18,7 @@ export default function User({ children }) {
     getUser();
   }, []);
 
-  return <UserContext.Provider value={{...user, setUser}}>{children}</UserContext.Provider>;
+  const value = useMemo(() => ({ ...user, setUser }), [user]);
+
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
