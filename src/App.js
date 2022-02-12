@@ -1,42 +1,32 @@
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
+    BrowserRouter as Router, Switch, Route
 } from "react-router-dom";
+
+import routes from "./contstants/routes";
 
 import Home from './pages/index';
 import Login from './pages/login';
 import Registration from './pages/registration';
+import User from "./global/user";
 
 function App() {
-  return (
-      <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-            </ul>
-          </nav>
-
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-          <Switch>
-            <Route exact path="/"  >
-              <Home />
-            </Route>
-            <Route exact path="/login"  >
-              <Login />
-            </Route>
-            <Route exact path="/registration"  >
-              <Registration />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-  );
+    return (
+        <User>
+            <Router>
+                <Switch>
+                    <Route exact path={routes.HOME}>
+                        <Home/>
+                    </Route>
+                    <Route exact path={routes.LOGIN}>
+                        <Login/>
+                    </Route>
+                    <Route exact path={routes.REGISTRATION}>
+                        <Registration/>
+                    </Route>
+                </Switch>
+            </Router>
+        </User>
+    );
 }
 
 export default App;
