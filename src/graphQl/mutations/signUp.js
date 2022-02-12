@@ -17,5 +17,8 @@ const SIGN_UP_MUTATION = gql`
 `;
 
 export async function signUp(client, params) {
-  return client.mutate({ mutation: SIGN_UP_MUTATION, variables: params });
+  const {
+    data: { signup },
+  } = await client.mutate({ mutation: SIGN_UP_MUTATION, variables: params });
+  return signup;
 }

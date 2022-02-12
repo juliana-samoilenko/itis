@@ -12,8 +12,12 @@ export default function User({ children }) {
   useEffect(() => {
     const getUser = async () => {
       setUser((cState) => ({ ...cState, isLoading: true }));
-      const user = await currentUser(client);
-      setUser((cState) => ({ ...cState, user: user.data.me, isLoading: false }));
+      try {
+        const user = await currentUser(client);
+        setUser((cState) => ({ ...cState, user: user.data.me }));
+      } finally {
+        setUser((cState) => ({ ...cState, isLoading: false }));
+      }
     };
     getUser();
   }, []);

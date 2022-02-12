@@ -14,7 +14,7 @@ export default function Registration() {
     const { id, value } = event.target;
     setRegistrationForm((currentState) => ({
       ...currentState,
-      [id]:type === 'blur' ? value.trim() : value,
+      [id]: type === 'blur' ? value.trim() : value,
     }));
   };
 
@@ -34,10 +34,10 @@ export default function Registration() {
 
     const result = await signUp(client, registrationForm);
 
-    setUser((cState) => ({ ...cState, user: result.data.signup.me }));
+    setUser((cState) => ({ ...cState, user: result.me }));
 
-    localStorage.setItem(authKeys.ACCESS_TOKEN, result.data.signup.accessToken);
-    localStorage.setItem(authKeys.REFRESH_TOKEN, result.data.signup.refreshToken);
+    localStorage.setItem(authKeys.ACCESS_TOKEN, result.accessToken);
+    localStorage.setItem(authKeys.REFRESH_TOKEN, result.refreshToken);
   };
 
   return (

@@ -1,8 +1,16 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useApolloClient } from '@apollo/client';
+
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../global/user/user';
+import signIn from '../graphQl/mutations/signIn';
+import authKeys from '../constants/authKeys';
+import routes from '../constants/routes';
 
 export default function Login() {
-  const [loginForm, setLoginForm] = useState({ login: '', password: '' });
+  const [loginForm, setLoginForm] = useState({ email: '', password: '' });
+
+  const { user, isLoading, setUser } = useContext(UserContext);
 
   const handleEvent = (event) => {
     const { type } = event;
@@ -13,15 +21,28 @@ export default function Login() {
     }));
   };
 
-  const handleLoginClick = (event) => {
+  const history = useHistory();
+  useEffect(() => {
+    if (user && !isLoading) {
+      history.push(routes.HOME);
+    }
+  }, [user, isLoading]);
+
+  const client = useApolloClient();
+  const handleLoginClick = async (event) => {
     event.preventDefault();
-    console.log('login', loginForm);
+    const data = await signIn(client, loginForm);
+
+    setUser((cState) => ({ ...cState, user: data.me }));
+
+    localStorage.setItem(authKeys.ACCESS_TOKEN, data.accessToken);
+    localStorage.setItem(authKeys.REFRESH_TOKEN, data.refreshToken);
   };
 
   return (
     <div>
       <form>
-        <input type="text" id="login" onChange={handleEvent} onBlur={handleEvent} value={loginForm.login} />
+        <input type="text" id="email" onChange={handleEvent} onBlur={handleEvent} value={loginForm.email} />
         <input type="password" id="password" onChange={handleEvent} onBlur={handleEvent} value={loginForm.password} />
         <button type="button" onClick={handleLoginClick}>
           login
