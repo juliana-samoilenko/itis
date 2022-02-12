@@ -3,17 +3,17 @@ import { useApolloClient } from '@apollo/client';
 
 import { currentUser } from '../../graphQl/query/currentUser';
 
-export const UserContext = createContext({ user: null });
+export const UserContext = createContext({ user: null, isLoading: true });
 
 export default function User({ children }) {
-  const [user, setUser] = useState({ user: null, isLoading: false });
+  const [user, setUser] = useState({ user: null, isLoading: true });
 
   const client = useApolloClient();
   useEffect(() => {
     const getUser = async () => {
       setUser((cState) => ({ ...cState, isLoading: true }));
       const user = await currentUser(client);
-      setUser((cState) => ({ ...cState, user: user.me, isLoading: false }));
+      setUser((cState) => ({ ...cState, user: user.data.me, isLoading: false }));
     };
     getUser();
   }, []);
