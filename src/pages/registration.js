@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { signUp } from '../graphQl/mutations/signUp';
+import { UserContext } from '../global/user/user';
+import authKeys from '../constants/authKeys';
+import { useHistory } from 'react-router-dom';
+import routes from '../constants/routes';
 
 export default function Registration() {
   const [registrationForm, setRegistrationForm] = useState({ email: '', password: '', firstName: '', lastName: '' });
@@ -21,39 +25,55 @@ export default function Registration() {
     }));
   };
 
+
+  const { user, isLoading, setUser } = useContext(UserContext);
+
   const client = useApolloClient();
+
+  const history = useHistory();
+  useEffect(() => {
+    if (user && !isLoading) {
+      history.push(routes.HOME);
+    }
+  }, [user, isLoading]);
 
   const handleLoginClick = async (event) => {
     event.preventDefault();
-    await signUp(client, registrationForm);
+
+    const result = await signUp(client, registrationForm);
+
+    setUser((cState) => ({ ...cState, user: result.me }));
+    localStorage.setItem(authKeys.ACCESS_TOKEN, result.accessToken);
+    localStorage.setItem(authKeys.ACCESS_TOKEN, result.refreshToken);
+
   };
 
   return (
     <div>
       <form>
-        <input type="text" id="email" onChange={handleChange} onBlur={handleBlur} value={registrationForm.email} />
+        <input type='text' id='email' onChange={handleChange} onBlur={handleBlur} value={registrationForm.email} />
         <input
-          type="password"
-          id="password"
+          type='password'
+          id='password'
           onChange={handleChange}
           onBlur={handleBlur}
           value={registrationForm.password}
         />
         <input
-          type="text"
-          id="firstName"
+          type='text'
+          id='firstName'
           onChange={handleChange}
           onBlur={handleBlur}
           value={registrationForm.firstName}
         />
         <input
-          type="text"
-          id="lastName"
+          type='text'
+          id='lastName'
           onChange={handleChange}
           onBlur={handleBlur}
           value={registrationForm.lastName}
         />
-        <button onClick={handleLoginClick} type="button">
+        <button onClick={handleLoginClick} type='button'>
           register
         </button>
       </form>
