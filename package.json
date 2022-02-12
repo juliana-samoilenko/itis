@@ -35,10 +35,7 @@
     "lint": "eslint './**/*.{js,ts,jsx,tsx}' --fix"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
