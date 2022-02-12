@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useApolloClient } from '@apollo/client';
+import { signUp } from '../graphQl/mutations/signUp';
 
 export default function Registration() {
   const [registrationForm, setRegistrationForm] = useState({ email: '', password: '', firstName: '', lastName: '' });
@@ -19,9 +21,11 @@ export default function Registration() {
     }));
   };
 
-  const handleLoginClick = (event) => {
+  const client = useApolloClient();
+
+  const handleLoginClick = async (event) => {
     event.preventDefault();
-    console.log('login', registrationForm);
+    await signUp(client, registrationForm);
   };
 
   return (
@@ -43,14 +47,14 @@ export default function Registration() {
           value={registrationForm.firstName}
         />
         <input
-          type="password"
+          type="text"
           id="lastName"
           onChange={handleChange}
           onBlur={handleBlur}
           value={registrationForm.lastName}
         />
-        <button type="button" onClick={handleLoginClick}>
-          Register
+        <button onClick={handleLoginClick} type="button">
+          register
         </button>
       </form>
     </div>

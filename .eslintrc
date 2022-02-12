@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "react-app",  "prettier", "plugin:react/jsx-runtime"],
+  "extends": ["airbnb", "plugin:react/recommended",  "prettier", "plugin:react/jsx-runtime"],
   "globals": {
     "document": true,
     "localStorage": true,

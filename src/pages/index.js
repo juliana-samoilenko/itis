@@ -1,4 +1,4 @@
-import useIsAuthUser from 'global/useIsAuthUser';
+import useIsAuthUser from '../global/user/useIsAuthUser';
 
 export default function Home() {
   useIsAuthUser();
